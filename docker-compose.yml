@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   mysql:
     image: mysql:8.0
@@ -16,6 +18,11 @@ services:
 
   redis:
     image: redis:7.0
+    command: 
+      - redis-server 
+      - --maxmemory 100mb          # Límite máximo de memoria
+      - --maxmemory-policy allkeys-lru  # Política de evicción LRU
+      - --save ""                  # Deshabilita la persistencia para pruebas
     ports:
       - "6379:6379"
     volumes:
